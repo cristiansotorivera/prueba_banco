@@ -1,0 +1,26 @@
+CREATE DATABASE bancosolar;
+
+DROP TABLE IF EXISTS TRANSFERENCIAS;
+DROP TABLE IF EXISTS USUARIOS;
+
+CREATE TABLE usuarios (
+	id SERIAL PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	balance FLOAT CHECK (balance >= 0) NOT NULL
+);
+
+CREATE TABLE transferencias (
+	id SERIAL PRIMARY KEY,
+	emisor INT,
+	receptor INT,
+	monto FLOAT,
+	fecha TIMESTAMP,
+	FOREIGN KEY (emisor) REFERENCES usuarios(id) ON DELETE CASCADE,
+	FOREIGN KEY (receptor) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+INSERT INTO USUARIOS (NOMBRE,BALANCE) VALUES 
+('Cristian Soto',100000),
+('Gene Simmons',3000000),
+('Gabriel Boric', 80000),
+('Jesse Pinkman', 80000);
